@@ -2,3 +2,8 @@ node_modules
 db/config/mlab.js
 **/.DS_Store
 client/dist/bundle.js
+
+
+## Seed files
+reviews.csv
+reviews.json
