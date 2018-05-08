@@ -37,9 +37,8 @@ export default class Review extends React.Component {
         if (keyword == null) {
             keyword = this.state.keyword;
         }
-        axios.get(`http://127.0.0.1:3000/reviews/`, {
+        axios.get(`http://127.0.0.1:3000/reviews/${this.props.locationId}`, {
             params : {
-                locationId: this.props.locationId,
                 index: pageIndex,
                 keyword: keyword
             }

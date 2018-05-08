@@ -12,8 +12,8 @@ app.use(cors());
 
 //server static content
 app.use(express.static(path.join(__dirname, '../client/dist')));
-app.get('/reviews', function (req, res) {
-    const locationId = req.query.locationId;
+app.get('/reviews/:locationId', function (req, res) {
+    const locationId = req.params.locationId;
     const pageIndex = Number(req.query.index);
     if (locationId === undefined) {
         res.sendStatus(404);

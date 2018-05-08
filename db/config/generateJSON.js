@@ -153,14 +153,17 @@ var appendFile = function(filename, string) {
 }
 
 var populate = async function() {
-  for (var i = 1; i < 1001; i++) {
+  let locationId = 0;
+  for (var i = 0; i < 1000; i++) {
     let batch = [];
     var reviewNo = 0;
-    for (var j = 1; j < 15001; j++) {
+    for (var j = 0; j < 20000; j++) {
+      if (j % 2 === 0) {
+        locationId++;
+      }
       let totalReviews = generateReviewsNumber();
       let user = randomUser();
       let rating = generateRandomRating();
-      let locationId = generateRandomId();
       let review = {
         locationId : locationId,
         customerName : user.name, 

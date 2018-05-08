@@ -11,7 +11,7 @@
   "scripts": {
     "react-dev": "webpack -d --watch",
     "start": "node server/index.js",
-    "server-start": "nodemon server/index.js",
+    "server-dev": "nodemon server/index.js",
     "test": "jest -e --forceExit --coverage --verbose --updateSnapshot",
     "setup:json": "node db/config/generateJSON.js",
     "setup:csv": "node db/config/generateCSV.js"
