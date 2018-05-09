@@ -1,0 +1,12 @@
+config:
+  target: "http://localhost:3000/reviews"
+  phases:
+    - duration: 20
+      arrivalRate: 20
+scenarios:
+  - name: "Browsing"
+    flow:
+    - loop:
+      - get:
+          url: "/{{ $loopCount }}?index=1"
+          count: 5
