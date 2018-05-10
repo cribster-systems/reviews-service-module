@@ -21,6 +21,10 @@
   "dependencies": {
     "aws-sdk": "^2.224.1",
     "axios": "^0.18.0",
+    "babel-plugin-css-modules-transform": "^1.6.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "babel-plugin-transform-styles": "0.0.3",
+    "babel-register": "^6.26.0",
     "body-parser": "^1.17.0",
     "bootstrap": "^4.1.0",
     "cluster": "^0.7.7",

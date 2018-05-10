@@ -6,6 +6,7 @@ import ReviewItem from './ReviewItem.jsx'
 import Paginations from './Paginations.jsx';
 import Ratings from './Ratings.jsx';
 import 'bootstrap/dist/css/bootstrap.css';
+import styles from './style.css';
 
 export default class Review extends React.Component {
     constructor(props) {
@@ -44,6 +45,7 @@ export default class Review extends React.Component {
             }
         })
         .then(reviews => { 
+            console.log(reviews);
             var newStateObj = {
                 reviews: reviews.data.getFive, 
                 totalReviews: reviews.data.totalReviews,
@@ -62,6 +64,7 @@ export default class Review extends React.Component {
     }
     renderReviews() {
         // console.log('inside renderReviews() reviews and count-', this.state.reviews);    
+        console.log("Reviews: ", JSON.parse(JSON.stringify(this.state.reviews)));
         return this.state.reviews.map((review, index) => {
             return <ReviewItem key={index} review={review}/>
         })
@@ -72,7 +75,7 @@ export default class Review extends React.Component {
     }
     render() {      
         return (
-            <div style={Style.reviewComponent}>
+            <div style={Style.reviewComponent} className={styles['test']}>
             <Ratings averageRatings={this.state.averageRatings} totalReviews={this.state.totalReviews} searchKeyword={this.searchKeyword}/>
             <div>{this.renderReviews()}</div> 
             <Paginations cb={this.getReviews} searchReviews={this.state.searchResultsReviewsTotal}/>
