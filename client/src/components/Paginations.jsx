@@ -27,7 +27,7 @@ export default class Paginations extends React.Component {
                         <PaginationLink style={Style.pageNumberStyling} href="#">{i}</PaginationLink>
                     </PaginationItem>)           
         }
-        return pageIndex;
+        return pageIndex
     }
     render() {
         return (

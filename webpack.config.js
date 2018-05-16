@@ -1,34 +1,53 @@
-var path = require('path');
-var SRC_DIR = path.join(__dirname, './client/src');
-var DIST_DIR = path.join(__dirname, './client/dist');
+const path = require('path');
+require('dotenv').config();
+const SRC_DIR = path.join(__dirname, '/client/src');
+const DIST_DIR = process.env.NODE_ENV === 'production' 
+  ? path.join(__dirname, '/public') 
+  : path.join(__dirname,'/client/dist');
 
-module.exports = {
-  entry: `${SRC_DIR}/index.js`,
-  output: {
-    filename: 'bundle.js',
-    path: DIST_DIR
-  },
-  resolve: {
-    modules: [
-      path.resolve('./server'),
-      "node_modules"
-    ],
-  },
+const suffix = process.env.NODE_ENV === 'production' 
+  ? '.min' 
+  : '';
+
+const common = {
+  context: SRC_DIR,
   module : {
-    loaders : [
+    rules : [
       {
-        test : /\.jsx?/,
-        include : SRC_DIR,
+        test : /\.jsx?$/,
+        exclude: /node_modules/,
         loader : 'babel-loader',      
         query: {
-          presets: ['react', 'es2015']
+          presets: ['react', 'env']
         }
       },
       {
         test : /\.css$/, 
         loader: 'style-loader!css-loader',
-
       }
     ]
   }
 };
+
+const client = {
+  entry: './client.js',
+  output: {
+    path: DIST_DIR,
+    filename: `client-bundle${suffix}.js`
+  }
+};
+
+const server = {
+  entry: './server.js',
+  target: 'node',
+  output: {
+    path: DIST_DIR,
+    filename: `server-bundle${suffix}.js`,
+    libraryTarget: 'commonjs-module'
+  }
+}
+
+module.exports = [
+  Object.assign({}, common, client),
+  Object.assign({}, common, server)
+];

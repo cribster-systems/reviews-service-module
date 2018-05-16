@@ -10,10 +10,10 @@ const _ = require('lodash');
 // const mLabConfig = require('./mLab.js');
 
 const mongoHost = process.env.NODE_ENV === 'production' 
-? '172.17.0.3'
-: 'localhost';
-
+  ? '172.17.0.3'
+  : 'localhost';
 mongoose.connect(`mongodb://${mongoHost}:27017/starkiller-reviews`);
+
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
@@ -23,7 +23,7 @@ db.once('open', () => {
 
 let ReviewSchema = mongoose.Schema({
     //reviewId : {type: Number, unique: true},
-    locationId : Number,
+    locationId : {type: Number, unique: true, index: true},
     customerName : String, 
     customerProfilePhotoUrl : String,
     customerReview : String,
@@ -156,15 +156,17 @@ var appendFile = function(filename, string) {
   })
 }
 
+var max = 10000000
+
 var populate = async function() {
   let locationId = 0;
   for (var i = 0; i < 1000; i++) {
     let batch = [];
-    var reviewNo = 0;
-    for (var j = 0; j < 20000; j++) {
-      if (j % 2 === 0) {
-        locationId++;
-      }
+    if (locationId === max) {
+      locationId = 0;
+    }
+    for (var j = 0; j < 15000; j++) {
+      locationId++;
       let totalReviews = generateReviewsNumber();
       let user = randomUser();
       let rating = generateRandomRating();
@@ -181,17 +183,15 @@ var populate = async function() {
         ratingLocation : rating,
         ratingValue : rating
       } 
-      batch.push(JSON.stringify(review));
+      batch.push(review);
     }
-    await appendFile("reviews.json", batch.join('\n'))
-      .then(() => {console.log('Wrote batch ' + i);});
-    // await Review.insertMany(batch, (err) => {
-    //   if (err) {
-    //     console.log(err);
-    //   } else {
-    //     console.log('Uploaded batch ' + i);
-    //   }
-    // });
+    await Review.insertMany(batch, (err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('Uploaded batch ' + i);
+      }
+    });
   }
 };
 

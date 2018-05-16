@@ -3,9 +3,11 @@ const mongoose = require('mongoose');
 //     useMongoClient: true,
 // });
 // const mLabConfig = require('./config/mLab.js');
-mongoose.connect('mongodb://localhost/starkiller-reviews');
+const mongoHost = process.env.NODE_ENV === 'production' 
+    ? '172.17.0.3'
+    : 'localhost';
 
-
+mongoose.connect(`mongodb://${mongoHost}:27017/starkiller-reviews`);
 
 //create a review schema
 let ReviewSchema = mongoose.Schema({
