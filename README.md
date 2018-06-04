@@ -16,15 +16,15 @@
 
 ## Usage
 
-> Some usage instructions
-> Before cloning, make sure that you have MongoDB and Redis installed, and make sure they are up and running
-> Clone the repo to your local machine
-> CD into the directory and run npm install
-> Go to db/config/ and run node generateJSON.js, which will create a JSON representation of mock data
-> Use the new JSON file to populate the MongoDB database
-> Make sure NODE_ENV is set to development
-> Run npm run react-dev in one terminal and npm run server-dev in another
-> See the app running in localhost:3000!
+>  - Some usage instructions
+>  - Before cloning, make sure that you have MongoDB and Redis installed, and make sure they are up and running
+>  - Clone the repo to your local machine
+>  - CD into the directory and run npm install
+>  - Go to db/config/ and run node generateJSON.js, which will create a JSON representation of mock data
+>  - Use the new JSON file to populate the MongoDB database
+>  - Make sure NODE_ENV is set to development
+>  - Run npm run react-dev in one terminal and npm run server-dev in another
+>  - See the app running in localhost:3000!
 
 ## Requirements
 
