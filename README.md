@@ -1,6 +1,6 @@
 # Project Name
 
-> The reviews component of an existing lodging app, with the backend modified to hold 10 million primary records and optimized to handle up to 1910 requests per second in development and 469 requests per second in production
+> The reviews component of an existing lodging app, with the backend modified to hold 10 million primary records and optimized to handle up to 1910 requests per second in development and 449 requests per second in production
 
 ## Related Projects
 
