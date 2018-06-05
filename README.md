@@ -99,14 +99,14 @@ scenarios:
 
 Initial testing in production with one EC2 instance:
 <p>Peak RPS: 115</p>
-Why is production RPS so much slower than development RPS? 
+What happened? Why is production RPS so much slower than development RPS? 
 This was most likely related to my use of a T2 Micro instance in EC2, which only has 1GB of RAM and a single core, rendering my node cluster implementation ineffective. T2 Micro instance is not very well suited for production (At least for a backend of this size)
 
 So what else could I do? Turns out AWS has Elastic Load Balancers, to which I can register several EC2 instances. The load balancer would handle all incoming traffic and spread the requests amongst my registered EC2 instances.
 
 After implementing AWS Elastic Load Balancer with 10 EC2 instances, with one instance of Redis server and one instance of MongoDB server:
 <p>Peak RPS: 329</p>
-<p>As I expected, I saw almost a three-fold improvement, but was still a little short of my goal. I realized that a possible bottleneck could be that I only have one MongoDB instance so reads from the database could be slowing down traffic.</p>
+<p>As I expected, I saw almost a three-fold improvement, but was still a little short of my goal. I realized that a possible bottleneck could be that although I have ten EC2 instances, they all read from one MongoDB instance so reads from the database could be slowing down traffic.</p>
 
 <p>After implementing Elastic Load Balancer for MongoDB instances and creating 5 instances:</p>
 <p>Peak RPS: 449</p>
